@@ -1,3 +1,3 @@
-export const SideBar = () => {
-  return <>Sidebar</>;
+export const SideBar = (props) => {
+  return <></>;
 };
