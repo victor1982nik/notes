@@ -2,6 +2,7 @@ import "./App.css";
 import { AppBar } from "./components/AppBar/AppBar";
 import { SideBar } from "./components/SideBar/SideBar";
 import { WorkSpace } from "./components/WorkSpace/WorkSpace";
+import { getFields } from "./components/api/quintaAPI";
 const notices = [
   {
     id: "1",
@@ -24,6 +25,8 @@ const notices = [
 ];
 
 function App() {
+  getFields().then(console.log);
+
   return (
     <div className="App">
       <AppBar isNoticeSelected={null} />
