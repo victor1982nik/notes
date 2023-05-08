@@ -8,22 +8,23 @@ export const Form = styled.form`
   background-color: #fff;
   border-radius: 3px;
   overflow: hidden;
+  height: 30px;
 `;
 
 export const Input = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;
-  font-size: 20px;
+  font-size: 18px;
   border: none;
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
 
   &::placeholder {
     font: inherit;
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 

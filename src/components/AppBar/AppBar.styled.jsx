@@ -1,8 +1,13 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.ul`
+  gap: 2px;
+  display: flex;
+`;
 
-export const Button = styled.button``;
+export const Button = styled.button`
+  padding: 2px 16px;
+`;
 
 export const Box = styled.div`
   background-color: grey;

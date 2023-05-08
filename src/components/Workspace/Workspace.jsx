@@ -1,3 +1,9 @@
+import { Box } from "./WorkSpace.styled";
+
 export const WorkSpace = () => {
-  return <>workSpace</>;
+  return (
+    <>
+      <Box>workSpace</Box>
+    </>
+  );
 };
