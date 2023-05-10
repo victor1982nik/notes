@@ -1,18 +1,31 @@
-import { Box, List, ListItem } from "./SideBar.styled";
+import { ListItem } from "../ListItem/ListItem";
+import { Box, List } from "./SideBar.styled";
+import { useState } from "react";
 
-export const SideBar = ({ notices }) => {
-  console.log(notices);
+export const SideBar = ({ notices, selectActiveNote }) => {
+  const [isActive, setIsActive] = useState(null);
+  //console.log(notices);
+
+  // const handleClick = (id) => {
+  //   selectActiveNote(id);
+  //   setIsActive(id);
+  //   console.log(isActive);
+  // };
+  const handleActive = (id) => {
+    setIsActive(id);
+  };
   return (
     <>
       <Box>
         <List>
           {notices.map((notice) => (
-            <ListItem key={notice.id}>
-              <p>{notice.title}</p>
-              <p>
-                {notice.createdAt} {notice.text}
-              </p>
-            </ListItem>
+            <ListItem
+              selectActiveNote={selectActiveNote}
+              setActiveId={handleActive}
+              activeId={isActive}
+              key={notice.id}
+              notice={notice}
+            />
           ))}
         </List>
       </Box>

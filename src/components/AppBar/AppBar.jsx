@@ -3,8 +3,11 @@ import { Box, Button, Wrapper } from "./AppBar.styled";
 import { AiOutlinePlus } from "react-icons/ai";
 import { ImBin } from "react-icons/im";
 import { FaEdit } from "react-icons/fa";
+import { useContext } from "react";
+import { Context } from "../../context";
 
 export const AppBar = ({ isNoticeSelected = false }) => {
+  const { deleteNote } = useContext(Context);
   return (
     <>
       <header>
@@ -13,7 +16,11 @@ export const AppBar = ({ isNoticeSelected = false }) => {
             <Button type="button">
               <AiOutlinePlus size={"20px"} />
             </Button>
-            <Button disabled={!isNoticeSelected} type="button">
+            <Button
+              disabled={!isNoticeSelected}
+              type="button"
+              OnClick={deleteNote}
+            >
               <ImBin size={"20px"} />
             </Button>
             <Button disabled={!isNoticeSelected} type="button">

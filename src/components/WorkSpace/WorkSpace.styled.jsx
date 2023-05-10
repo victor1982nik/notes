@@ -5,3 +5,9 @@ export const Box = styled.div`
   height: 100vh;
   width: 70%;
 `;
+
+export const Title = styled.div``;
+
+export const Text = styled.p``;
+
+export const DateTitle = styled.p``;
