@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://quintadb.ru/apps/";
 axios.defaults.params = {
-  rest_api_key: "",
+  rest_api_key: "bNWQ40WQ1dGyoZcIyon8o0",
   //rest_api_key: process.env.REACT_APP_API_KEY_QUINTA,
 };
 

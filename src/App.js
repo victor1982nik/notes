@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { AppBar } from "./components/AppBar/AppBar";
 import { SideBar } from "./components/SideBar/SideBar";
-import { WorkSpace } from "./components/WorkSpace/WorkSpace";
+import { WorkSpace } from "./components/WorkSpace1/WorkSpace";
 import { getFields } from "./components/api/quintaAPI";
 import { Context } from "./context";
 // const notices = [
@@ -31,6 +31,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [activeNote, setActiveNote] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [add, setAdd] = useState(false);
 
   useEffect(() => {
     try {
@@ -57,27 +58,35 @@ function App() {
     //console.log(note);
     setActiveNote(note);
     setEdit(false);
+    setAdd(false);
   };
 
   const deleteNote = () => {
     console.log("delete ", activeNote.id);
     //console.log("delete")
     //setNotes((state) => state.filter((note) => note.id !== id));
+    //setActiveNote(null)
   };
 
-  const EditNote = () => {
+  const editNote = () => {
     console.log("edit");
     setEdit(true);
   };
-  console.log(activeNote);
+
+  const addNote = () => {
+    console.log("add");
+    setAdd(true);
+  };
+
+  console.log("activeNote", activeNote);
   return (
-    <Context.Provider value={{ deleteNote, EditNote }}>
+    <Context.Provider value={{ deleteNote, editNote, addNote }}>
       <div className="App">
         <AppBar isNoticeSelected={activeNote} />
         <main className="main">
           {isLoading && <div>Идет загрузка</div>}
           <SideBar notices={notes} selectActiveNote={handleSelectNote} />
-          <WorkSpace activeNote={activeNote} edit={edit} />
+          <WorkSpace activeNote={activeNote} edit={edit} add={add} />
         </main>
       </div>
     </Context.Provider>

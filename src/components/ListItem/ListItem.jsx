@@ -24,8 +24,8 @@ export const ListItem = ({
     selectActiveNote(id);
     //console.log(isActive);
   };
-  console.log("notice.id", notice.id);
-  console.log("activeId", activeId);
+  //console.log("notice.id", notice.id);
+  //console.log("activeId", activeId);
   return (
     <Item
       onClick={() => handleClick(notice.id)}

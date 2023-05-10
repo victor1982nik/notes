@@ -7,23 +7,28 @@ import { useContext } from "react";
 import { Context } from "../../context";
 
 export const AppBar = ({ isNoticeSelected = false }) => {
-  const { deleteNote } = useContext(Context);
+  const { deleteNote, editNote, addNote } = useContext(Context);
+  //console.log("addNote", addNote);
   return (
     <>
       <header>
         <Box>
           <Wrapper>
-            <Button type="button">
+            <Button type="button" onClick={addNote}>
               <AiOutlinePlus size={"20px"} />
             </Button>
             <Button
               disabled={!isNoticeSelected}
               type="button"
-              OnClick={deleteNote}
+              onClick={deleteNote}
             >
               <ImBin size={"20px"} />
             </Button>
-            <Button disabled={!isNoticeSelected} type="button">
+            <Button
+              disabled={!isNoticeSelected}
+              type="button"
+              onClick={editNote}
+            >
               <FaEdit size={"20px"} />
             </Button>
           </Wrapper>
