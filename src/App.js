@@ -3,7 +3,7 @@ import "./App.css";
 import { AppBar } from "./components/AppBar/AppBar";
 import { SideBar } from "./components/SideBar/SideBar";
 import { WorkSpace } from "./components/WorkSpace1/WorkSpace";
-import { getFields } from "./components/api/quintaAPI";
+import { getFields, createNote, updateNote } from "./components/api/quintaAPI";
 import { Context } from "./context";
 // const notices = [
 //   {
@@ -56,7 +56,7 @@ function App() {
     //console.log(id);
     const note = notes.filter((item) => item.id === id);
     //console.log(note);
-    setActiveNote(note);
+    setActiveNote(...note);
     setEdit(false);
     setAdd(false);
   };
@@ -73,14 +73,25 @@ function App() {
     setEdit(true);
   };
 
-  const addNote = () => {
-    console.log("add");
+  const addNote = async () => {
+    //console.log("add");
+    const note = await createNote();
+    console.log(note);
     setAdd(true);
+    setActiveNote(note.record);
   };
 
-  console.log("activeNote", activeNote);
+  const modifyNote = async (data) => {
+    //console.log("data", data);
+    data.id = activeNote?.id;
+    //console.log("activeNote.id", activeNote?.id);
+    //console.log("data", data);
+    const note = await updateNote(data);
+    console.log(note);
+  };
+  //console.log("activeNote", activeNote);
   return (
-    <Context.Provider value={{ deleteNote, editNote, addNote }}>
+    <Context.Provider value={{ deleteNote, editNote, addNote, modifyNote }}>
       <div className="App">
         <AppBar isNoticeSelected={activeNote} />
         <main className="main">

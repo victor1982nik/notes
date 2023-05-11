@@ -11,7 +11,9 @@ export const Title = styled.div``;
 
 export const Text = styled.p``;
 
-export const DateTitle = styled.p``;
+export const DateTitle = styled.p`
+  margin-bottom: 20px;
+`;
 
 export const TextInput = styled.input`
   display: block;

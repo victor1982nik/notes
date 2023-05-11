@@ -19,7 +19,7 @@ export const ListItem = ({
 
   const handleClick = (id) => {
     //console.log("isActive", isActive);
-    console.log("id", id);
+    //console.log("id", id);
     setActiveId(id);
     selectActiveNote(id);
     //console.log(isActive);
