@@ -1,4 +1,4 @@
-import { title, text } from "../api/quintaAPI";
+//import { title, text } from "../api/quintaAPI";
 import { Text, Item } from "./ListItem.styled";
 import { useContext } from "react";
 import { Context } from "../../context";
@@ -27,10 +27,22 @@ export const ListItem = ({ notice, selectActiveNote, setActiveId }) => {
       onClick={() => handleClick(notice.id)}
       selected={activeNote?.id === notice.id}
     >
-      <Text>{notice.values[title]}</Text>
+      <Text>{notice.values?.title}</Text>
+
       <Text>
-        {convertDate(notice.updated_at)} {notice.values[text]}
+        {convertDate(notice.updated_at)} {notice.values?.text}
       </Text>
     </Item>
   );
 };
+
+/* <Item
+  onClick={() => handleClick(notice.id)}
+  selected={activeNote?.id === notice.id}
+>
+  <Text>{notice.values[title]}</Text>
+
+  <Text>
+    {convertDate(notice.updated_at)} {notice.values[text]}
+  </Text>
+</Item>; */

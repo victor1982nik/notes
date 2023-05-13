@@ -11,9 +11,10 @@ export async function getFields() {
   }
 }
 
-export async function updateNote(data) {
+export async function updateNote({id, title, text}) {
+    const body = {values: {title, text}}
   try {
-    const result = await axios.put(`/notes/${data.id}`, data);
+    const result = await axios.put(`/notes/${id}`, body);
     return result.data;
   } catch (e) {
     console.log(e.message);
@@ -23,8 +24,8 @@ export async function updateNote(data) {
 export const createNote = async (note) => {
   const reqBody = {
     values: {
-      title: "New note title ",
-      text: "New note text",
+      title: " ",
+      text: " ",
     },
   };
 

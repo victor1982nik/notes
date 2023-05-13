@@ -17,7 +17,7 @@ import {
 } from "./components/api/mockapi";
 
 import { Context } from "./context";
-import { title, text } from "./components/api/quintaAPI";
+//import { title, text } from "./components/api/quintaAPI";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -37,12 +37,13 @@ function App() {
 
   const modifyNote = async (data) => {
     if (!activeNote) return;
+    //debugger;
     if (edit === false && add === false) return;
     console.log("data", data);
     console.log("activeNoteValues", activeNote.values);
     if (
-      data.title === activeNote.values[title] &&
-      data.text === activeNote.values[text]
+      data.title === activeNote.values.title &&
+      data.text === activeNote.values.text
     )
       return;
     data.id = activeNote?.id;
@@ -50,7 +51,7 @@ function App() {
     console.log("note after update", note);
     //debugger;
     //setNotes(s => s.map((item))=> item.id === data.id ? {...item, values:{...item.values, }}: item)
-    //setActiveNote(note.record);
+
     //getData();
   };
 
@@ -92,12 +93,12 @@ function App() {
     console.log(note);
     setAdd(true);
     //setEdit(false);
-    setActiveNote(note.record);
+    setActiveNote(note);
     await getData();
   };
 
   //console.log("activeNote", activeNote);
-  console.log("notes", notes);
+  //console.log("notes", notes);
   return (
     <Context.Provider
       value={{
@@ -113,10 +114,10 @@ function App() {
         <AppBar isNoticeSelected={activeNote} />
         <main className="main">
           {isLoading && <div>Идет загрузка</div>}
-          {/* {notes.length !== 0 && (
+          {notes.length !== 0 && (
             <SideBar notices={notes} selectActiveNote={handleSelectNote} />
           )}
-          <WorkSpace activeNote={activeNote} edit={edit} add={add} /> */}
+          <WorkSpace activeNote={activeNote} edit={edit} add={add} />
         </main>
       </div>
     </Context.Provider>
