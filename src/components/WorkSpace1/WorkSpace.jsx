@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useMemo } from "react";
-import { debounce } from "lodash";
+import { useState, useEffect } from "react";
+
 import {
   Box,
   DateTitle,
@@ -11,6 +11,7 @@ import {
 } from "./WorkSpace.styled";
 import { useContext } from "react";
 import { Context } from "../../context";
+import { useDebounce } from "../hooks/hooks";
 //import { title, text } from "../api/quintaAPI";
 
 export const WorkSpace = ({ edit, add, activeNote }) => {
@@ -21,23 +22,7 @@ export const WorkSpace = ({ edit, add, activeNote }) => {
   //   title: " ",
   //   text: " ",
   // });
-  const useDebounce = (callback) => {
-    const ref = useRef();
 
-    useEffect(() => {
-      ref.current = callback;
-    }, [callback]);
-
-    const debouncedCallback = useMemo(() => {
-      const func = () => {
-        ref.current?.();
-      };
-
-      return debounce(func, 500);
-    }, []);
-
-    return debouncedCallback;
-  };
   const { modifyNote } = useContext(Context);
 
   // useEffect(() => {
@@ -108,6 +93,7 @@ export const WorkSpace = ({ edit, add, activeNote }) => {
       {/* редактирование заметки */}
       {activeNote && edit && !add && (
         <Box>
+          <DateTitle>{formatDate(activeNote.updated_at)}</DateTitle>
           <Form>
             <TextInput
               type="text"
@@ -115,14 +101,14 @@ export const WorkSpace = ({ edit, add, activeNote }) => {
               placeholder="Input note's title"
               onChange={handleChange}
               defaultValue={activeNote.values.title}
-            ></TextInput>
+            />
             <TextArea
               type="textarea"
               name="text"
               placeholder="Input note"
               onChange={handleChange}
               defaultValue={activeNote.values.text}
-            ></TextArea>
+            />
           </Form>
         </Box>
       )}
