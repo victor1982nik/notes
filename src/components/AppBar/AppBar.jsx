@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { Context } from "../../context";
 
 export const AppBar = ({ isNoticeSelected = false }) => {
-  const { deleteNote, editNote, addNote } = useContext(Context);
+  const { destroyNote, editNote, addNote } = useContext(Context);
   //console.log("addNote", addNote);
   return (
     <>
@@ -20,7 +20,7 @@ export const AppBar = ({ isNoticeSelected = false }) => {
             <Button
               disabled={!isNoticeSelected}
               type="button"
-              onClick={deleteNote}
+              onClick={destroyNote}
             >
               <ImBin size={"20px"} />
             </Button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { debounce } from "lodash";
 import {
   Box,
@@ -11,14 +11,20 @@ import {
 } from "./WorkSpace.styled";
 import { useContext } from "react";
 import { Context } from "../../context";
+import { title, text } from "../api/quintaAPI";
 
-export const WorkSpace = ({ activeNote, edit, add }) => {
-  const [data, setData] = useState({
-    title: "",
-    text: "",
-  });
+export const WorkSpace = ({ edit, add, activeNote }) => {
+  const [data, setData] = useState({});
   const { modifyNote } = useContext(Context);
-  //console.log("activeNote", activeNote?.record);
+
+  useEffect(() => {
+    setData({
+      title: activeNote?.values[title] || "",
+      text: activeNote?.values[text] || "",
+    });
+  }, [activeNote]);
+
+  //console.log("activeNote", activeNote?.values[title]);
   //console.log("activeNote2", activeNote);
   //console.log("add", add);
 
@@ -41,21 +47,25 @@ export const WorkSpace = ({ activeNote, edit, add }) => {
     switch (name) {
       case "title":
         setData({ ...data, title: value });
+
         break;
       case "text":
         setData({ ...data, text: value });
+
         break;
       default:
         return;
     }
-  }, 1000);
-
-  useEffect(() => {
-    if (data.text === "" && data.title === "") {
-      return;
-    }
     modifyNote(data);
-  }, [data, modifyNote]);
+  }, 500);
+
+  // useEffect(() => {
+  //   if (data.text === "" && data.title === "") {
+  //     return;
+  //   }
+
+  //   modifyNote(data);
+  // }, [data, modifyNote]);
 
   //console.log(data);
   return (
@@ -67,7 +77,7 @@ export const WorkSpace = ({ activeNote, edit, add }) => {
         </Box>
       )}
       {/* создание заметки */}
-      {activeNote && edit && (
+      {activeNote && edit && !add && (
         <Box>
           <Form>
             <TextInput
@@ -75,19 +85,19 @@ export const WorkSpace = ({ activeNote, edit, add }) => {
               name="title"
               placeholder="Input note's title"
               onChange={handleChange}
-              //value={activeNote.values.biWPGZWQbcK4JdNK_dRSoD}
+              defaultValue={activeNote.values[title]}
             ></TextInput>
             <TextArea
               type="textarea"
               name="text"
               placeholder="Input note"
               onChange={handleChange}
-              //value={activeNote.values.ddK1ldQCnmWQJdPNSMW4D9}
+              defaultValue={activeNote.values[text]}
             ></TextArea>
           </Form>
         </Box>
       )}
-      {activeNote && add && (
+      {activeNote && add && !edit && (
         <Box>
           <DateTitle>{formatDate(activeNote.updated_at)}</DateTitle>
           <Form>
@@ -110,8 +120,8 @@ export const WorkSpace = ({ activeNote, edit, add }) => {
       {activeNote && !edit && !add && (
         <Box>
           <DateTitle>{formatDate(activeNote.updated_at)}</DateTitle>
-          <Title>{activeNote.values.biWPGZWQbcK4JdNK_dRSoD}</Title>
-          <Text>{activeNote.values.ddK1ldQCnmWQJdPNSMW4D9}</Text>
+          <Title>{activeNote.values[title]}</Title>
+          <Text>{activeNote.values[text]}</Text>
         </Box>
       )}
     </>

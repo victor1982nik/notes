@@ -14,6 +14,7 @@ export const SideBar = ({ notices, selectActiveNote }) => {
   const handleActive = (id) => {
     setIsActive(id);
   };
+
   return (
     <>
       <Box>

@@ -1,13 +1,10 @@
-//import { useState } from "react";
+import { title, text } from "../api/quintaAPI";
 import { Text, Item } from "./ListItem.styled";
+import { useContext } from "react";
+import { Context } from "../../context";
 
-export const ListItem = ({
-  notice,
-  selectActiveNote,
-  activeId,
-  setActiveId,
-}) => {
-  //const [isActive, setIsActive] = useState("");
+export const ListItem = ({ notice, selectActiveNote, setActiveId }) => {
+  const { activeNote } = useContext(Context);
 
   const convertDate = (date) => {
     const dateInput = new Date(date);
@@ -18,7 +15,6 @@ export const ListItem = ({
   };
 
   const handleClick = (id) => {
-    //console.log("isActive", isActive);
     //console.log("id", id);
     setActiveId(id);
     selectActiveNote(id);
@@ -29,11 +25,11 @@ export const ListItem = ({
   return (
     <Item
       onClick={() => handleClick(notice.id)}
-      selected={activeId === notice.id}
+      selected={activeNote?.id === notice.id}
     >
-      <Text>{notice.values.biWPGZWQbcK4JdNK_dRSoD}</Text>
+      <Text>{notice.values[title]}</Text>
       <Text>
-        {convertDate(notice.updated_at)} {notice.values.ddK1ldQCnmWQJdPNSMW4D9}
+        {convertDate(notice.updated_at)} {notice.values[text]}
       </Text>
     </Item>
   );
