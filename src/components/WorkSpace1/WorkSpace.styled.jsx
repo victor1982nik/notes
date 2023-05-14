@@ -7,10 +7,6 @@ export const Box = styled.div`
   padding: 15px;
 `;
 
-export const Title = styled.div``;
-
-export const Text = styled.p``;
-
 export const DateTitle = styled.p`
   margin-bottom: 20px;
 `;

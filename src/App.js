@@ -31,28 +31,21 @@ function App() {
     if (!resp) {
       return;
     }
-    //setNotes((state) => [...state, ...resp]);
     setNotes(resp);
   };
 
   const modifyNote = async (data) => {
     if (!activeNote) return;
-    //debugger;
     if (edit === false && add === false) return;
-    console.log("data", data);
-    console.log("activeNoteValues", activeNote.values);
+
     if (
       data.title === activeNote.values.title &&
       data.text === activeNote.values.text
     )
       return;
     data.id = activeNote?.id;
-    const note = await updateNote(data);
-    console.log("note after update", note);
-    //debugger;
-    //setNotes(s => s.map((item))=> item.id === data.id ? {...item, values:{...item.values, }}: item)
-
-    //getData();
+    await updateNote(data);
+    getData();
   };
 
   useEffect(() => {
@@ -67,18 +60,14 @@ function App() {
   }, []);
 
   const handleSelectNote = (id) => {
-    //console.log(id);
     const note = notes.filter((item) => item.id === id);
-    //console.log(note);
     setActiveNote(...note);
     setEdit(false);
     setAdd(false);
   };
 
   const destroyNote = async () => {
-    //console.log("delete ", activeNote.id);
     await deleteNote(activeNote.id);
-
     setActiveNote(null);
     await getData();
   };
@@ -88,17 +77,12 @@ function App() {
   };
 
   const addNote = async () => {
-    //console.log("add");
     const note = await createNote();
-    console.log(note);
     setAdd(true);
-    //setEdit(false);
     setActiveNote(note);
     await getData();
   };
 
-  //console.log("activeNote", activeNote);
-  //console.log("notes", notes);
   return (
     <Context.Provider
       value={{
@@ -111,13 +95,13 @@ function App() {
       }}
     >
       <div className="App">
-        <AppBar isNoticeSelected={activeNote} />
+        <AppBar />
         <main className="main">
           {isLoading && <div>Идет загрузка</div>}
           {notes.length !== 0 && (
             <SideBar notices={notes} selectActiveNote={handleSelectNote} />
           )}
-          <WorkSpace activeNote={activeNote} edit={edit} add={add} />
+          <WorkSpace edit={edit} add={add} />
         </main>
       </div>
     </Context.Provider>
