@@ -83,6 +83,21 @@ function App() {
     await getData();
   };
 
+  const searchNotes = (e) => {
+    e.preventDefault();
+    const queryStr = e.target.elements.query.value;
+    if (queryStr === "") {
+      return;
+    }
+    const filteredNotes = notes.filter(
+      (note) =>
+        note.values.text.includes(queryStr) ||
+        note.values.title.includes(queryStr)
+    );
+    e.target.elements.query.value = "";
+    return filteredNotes;
+  };
+
   return (
     <Context.Provider
       value={{
@@ -91,6 +106,8 @@ function App() {
         addNote,
         modifyNote,
         setActiveNote,
+        handleSelectNote,
+        searchNotes,
         activeNote,
       }}
     >
@@ -98,9 +115,7 @@ function App() {
         <AppBar />
         <main className="main">
           {isLoading && <div>Идет загрузка</div>}
-          {notes.length !== 0 && (
-            <SideBar notices={notes} selectActiveNote={handleSelectNote} />
-          )}
+          {notes.length !== 0 && <SideBar notices={notes} />}
           <WorkSpace edit={edit} add={add} />
         </main>
       </div>
